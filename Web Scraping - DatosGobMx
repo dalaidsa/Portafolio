@@ -2,6 +2,9 @@
 Created on Sun May 24 13:03:20 2020
 
 @author: Dal
+
+Web Scraping del sitio www.datos.gob.mx
+Para obtener el csv de todos los títulos, descripciones y formatos del dataset de datos.gob.mx
 """
 
 from bs4 import BeautifulSoup as bs4
