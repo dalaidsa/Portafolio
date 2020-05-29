@@ -1,0 +1,59 @@
+"""
+Created on Sun May 24 13:03:20 2020
+
+@author: Dal
+"""
+
+from bs4 import BeautifulSoup as bs4
+import requests
+import pandas as pd
+
+#variables 
+pages = []
+titles = []
+descrips = []
+
+pages_to_scrape=448
+
+for i in range(1,pages_to_scrape+1,1):
+    url = ('https://datos.gob.mx/busca/dataset?page={}').format(i)
+    pages.append(url)
+for item in pages:
+    page = requests.get(item)
+    soup = bs4(page.text,'html.parser')
+    #print(soup.prettify())
+    for e in soup.findAll('div', class_='dependency'):
+        inst = e.find('a') 
+        inst1 = inst.getText()
+        instt = inst1.replace("\n","")
+        #print(instt)
+    for f in soup.findAll('div', class_='col-md-10 col-sm-10 col-xs-12'):
+        ttl = f.find('a')
+        ttl1= ttl.getText()
+        #print(ttl1)
+        titles.append(ttl1)
+        #print(titles)
+    des = soup.findAll('div', class_="col-md-10 col-sm-10 col-xs-12")
+    for g in des:
+        descr = g.find('p')
+        if descr is None:
+            sind = "Sin descripción"
+            descrips.append(sind)
+        else:
+            descrip = descr.getText()
+            descrips.append(descrip)
+    for h in soup.findAll('span', class_="dataset-format"):
+        formato=h.getText()
+        #print(formato)
+
+data={'Institución': instt,
+      'Títulos': titles,
+      'Descripción': descrips,
+      'Formato': formato
+      }
+
+df=pd.DataFrame(data=data)
+df.index+=1
+print(df)   
+
+df.to_csv("./prueba5.csv", encoding="utf-8-sig")
