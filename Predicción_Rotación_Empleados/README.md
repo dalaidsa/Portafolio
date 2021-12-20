@@ -2,7 +2,7 @@
 ### Autor: Dalaí Serrano Alavez
 ### Likedin: https://www.linkedin.com/in/dalser/
 ### email: dalai.dsa@gmail.com
-### Fuente: Datacamp - Human Resources Analytics: Predicting Employee Churn in Python
+#### Fuente: Datacamp - Human Resources Analytics: Predicting Employee Churn in Python
 
 ### Descripción del Proyecto:
 
